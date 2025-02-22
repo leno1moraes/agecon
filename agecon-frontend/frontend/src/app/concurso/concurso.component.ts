@@ -12,7 +12,7 @@ import { ConcursoService } from '../services/concurso.service';
 })
 export class ConcursoComponent implements OnInit {
 
-  public concursoModel: ConcursoModel[]=[];
+  public concursos: ConcursoModel[]=[];
 
   constructor(
     private concursoservice: ConcursoService,
@@ -24,8 +24,8 @@ export class ConcursoComponent implements OnInit {
 
   public prepararPagina(){
     this.concursoservice.listConcursos().subscribe((result) =>{
-      this.concursoModel = result;
-      console.log("Dados concursos: ", this.concursoModel);
+      this.concursos = result;
+      console.log("Dados concursos: ", this.concursos);
     });
   }
 

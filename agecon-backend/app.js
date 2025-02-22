@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var helloworldRouter = require('./routes/helloworld');
@@ -15,16 +16,31 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Configuração do CORS para permitir requisições do frontend Angular
+app.use(cors({
+  origin: '*', // Permite requisições apenas deste domínio Ex.: http://localhost:4200
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Headers permitidos
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Rotas
 app.use('/', indexRouter);
 app.use('/helloworld', helloworldRouter);
 app.use('/statusconcurso', statusConcursoRouter);
-app.use('/concurso', concursoRouter)
+app.use('/concurso', concursoRouter);
+
+/*
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

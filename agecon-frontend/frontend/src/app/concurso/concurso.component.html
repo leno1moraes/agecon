@@ -1,1 +1,12 @@
 <p>concurso works!</p>
+
+<table cellspadding="2">
+    <thead>
+        <th>id</th>
+        <th>Concurso</th>
+    </thead>
+    <tbody *ngFor="let c of concursos">
+        <td>{{ c.id }}</td>
+        <td>{{ c.titulo }}</td>
+    </tbody>
+</table>
