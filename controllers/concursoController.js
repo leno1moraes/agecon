@@ -23,6 +23,17 @@ class ConcursoController {
         }
     }       
 
+    static async getAllConcursoStatus(req, res) {
+      const { id } = req.params;
+      try {
+        const concurso = await ConcursoModel.getAllConcursoStatus(id);
+        res.status(200).json(concurso);
+      } catch (error) {
+        console.error('Erro ao buscar concursos:', error);
+        res.status(500).json({ error: 'Erro ao buscar concursos' });
+      }
+  }     
+
 }
 
 module.exports = ConcursoController;

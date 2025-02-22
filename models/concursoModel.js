@@ -14,6 +14,14 @@ class ConcursoModel {
         const result = await pool.query(query);
         return result.rows;
     }    
+
+    static async getAllConcursoStatus(id) {
+        const query = 'SELECT * FROM concurso_status WHERE concurso=$1 ORDER BY status';
+        const values = [id];
+        const result = await pool.query(query, values);
+        return result.rows;
+    }      
+
 }
 
 module.exports = ConcursoModel;
