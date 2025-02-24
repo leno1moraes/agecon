@@ -12,7 +12,8 @@ import { ConcursoService } from '../services/concurso.service';
 })
 export class ConcursoComponent implements OnInit {
 
-  public concursos: ConcursoModel[]=[];
+  concursos: ConcursoModel[]=[];
+  concursosAgrupados: { [key: string]: any[] } = {};
 
   constructor(
     private concursoservice: ConcursoService,
@@ -22,11 +23,31 @@ export class ConcursoComponent implements OnInit {
     this.prepararPagina();
   }
 
-  public prepararPagina(){
+  /*public prepararPagina(){
     this.concursoservice.listConcursos().subscribe((result) =>{
       this.concursos = result;
       console.log("Dados concursos: ", this.concursos);
     });
-  }
+  }*/
+
+  public prepararPagina(){
+    this.concursoservice.listConcursosStatus().subscribe((result) =>{
+      this.concursos = result;
+      
+
+      this.concursosAgrupados = this.concursos.reduce((acc, concurso) => {
+        if (!acc[concurso.titulo]) {
+          acc[concurso.titulo] = [];
+        }
+        acc[concurso.titulo].push(concurso);
+        return acc;
+      }, {} as { [key: string]: any[] });
+
+    });  
+
+    console.log("Dados concursos: ", this.concursos);
+    console.log("Dados concursos agrupados: ", this.concursosAgrupados);
+  }  
+
 
 }

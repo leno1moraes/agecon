@@ -1,20 +1,34 @@
 
 <main>
-    <!--
-    <table cellspadding="2">
-        <thead>
-            <th>Concurso</th>
-        </thead>
-        <tbody *ngFor="let c of concursos">
-            <td>{{ c.titulo }}</td>
-        </tbody>
-    </table>    
-    -->
-
-    <div *ngFor="let c of concursos">
+    
+    <div *ngFor="let titulo of concursosAgrupados | keyvalue">
         <div class="row" style="margin-bottom: 20px;">
             <div class="col">
-                {{ c.titulo }}
+                <div style="margin-bottom: 5px;">
+                    <span>{{ titulo.key }}</span>
+                </div>
+                <div class="row">
+                        <div *ngFor="let item of titulo.value" class="col-md-3 col-sm-12"                     
+                            [ngClass]="{
+                                'bg-info': item.status === 1, 
+                                'bg-warning': item.status === 2, 
+                                'bg-secondary': item.status === 3,
+                                'bg-danger': item.status === 4,
+                                'bg-light': !item.status
+                            }">
+                            <div class="tooltip-container">
+                                <svg title="TESTE teste" xmlns="http://www.w3.org/2000/svg" height="16" width="15" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"/>
+                                </svg> 
+                                <span class="tooltip-text">{{ item.data_inicio ? (item.data_inicio | date: 'dd/MM/yyyy') : 'N/A' }}</span>
+                            </div>                          
+                            {{ item.status_descricao || 'N/A' }}    
+                            <div class="tooltip-container" style="align-items: end;">
+                                <svg title="TESTE teste" xmlns="http://www.w3.org/2000/svg" height="16" width="15" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"/>
+                                </svg> 
+                                <span class="tooltip-text">{{ item.data_fim ? (item.data_fim | date: 'dd/MM/yyyy') : 'N/A' }}</span>
+                            </div>                                                                                
+                        </div>
+                </div>    
             </div>
         </div>
     </div>

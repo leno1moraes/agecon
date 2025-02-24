@@ -23,7 +23,7 @@ class ConcursoModel {
     }      
 
     static async getAllConcursoStatus(id) {
-        const query = ' SELECT c.id, c.titulo, cs.status, s.status, cs.data_inicio, cs.data_fim ' 
+        const query = ' SELECT c.id, c.titulo, cs.status, s.status as status_descricao, cs.data_inicio, cs.data_fim ' 
                       + ' FROM concurso c '
                       + ' LEFT JOIN concurso_status cs ON cs.concurso = c.id '
                       + ' LEFT JOIN status s ON s.id = cs.status '
