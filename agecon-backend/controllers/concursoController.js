@@ -23,7 +23,7 @@ class ConcursoController {
         }
     }       
 
-    static async getAllConcursoStatus(req, res) {
+    static async getConcursoStatus(req, res) {
       const { id } = req.params;
       try {
         const concurso = await ConcursoModel.getAllConcursoStatus(id);
@@ -32,7 +32,17 @@ class ConcursoController {
         console.error('Erro ao buscar concursos:', error);
         res.status(500).json({ error: 'Erro ao buscar concursos' });
       }
-  }     
+    }
+
+    static async getAllConcursoStatus(req, res) {
+      try {
+        const concurso = await ConcursoModel.getAllConcursoStatus();
+        res.status(200).json(concurso);
+      } catch (error) {
+        console.error('Erro ao buscar concursos x status:', error);
+        res.status(500).json({ error: 'Erro ao buscar concursos x status' });
+      }
+    }    
 
 }
 

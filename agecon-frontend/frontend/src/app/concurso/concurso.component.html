@@ -1,12 +1,22 @@
-<p>concurso works!</p>
 
-<table cellspadding="2">
-    <thead>
-        <th>id</th>
-        <th>Concurso</th>
-    </thead>
-    <tbody *ngFor="let c of concursos">
-        <td>{{ c.id }}</td>
-        <td>{{ c.titulo }}</td>
-    </tbody>
-</table>
+<main>
+    <!--
+    <table cellspadding="2">
+        <thead>
+            <th>Concurso</th>
+        </thead>
+        <tbody *ngFor="let c of concursos">
+            <td>{{ c.titulo }}</td>
+        </tbody>
+    </table>    
+    -->
+
+    <div *ngFor="let c of concursos">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col">
+                {{ c.titulo }}
+            </div>
+        </div>
+    </div>
+
+</main>

@@ -15,10 +15,20 @@ class ConcursoModel {
         return result.rows;
     }    
 
-    static async getAllConcursoStatus(id) {
+    static async getConcursoStatus(id) {
         const query = 'SELECT * FROM concurso_status WHERE concurso=$1 ORDER BY status';
         const values = [id];
         const result = await pool.query(query, values);
+        return result.rows;
+    }      
+
+    static async getAllConcursoStatus(id) {
+        const query = ' SELECT c.id, c.titulo, cs.status, s.status, cs.data_inicio, cs.data_fim ' 
+                      + ' FROM concurso c '
+                      + ' LEFT JOIN concurso_status cs ON cs.concurso = c.id '
+                      + ' LEFT JOIN status s ON s.id = cs.status '
+                      + ' ORDER By c.id, cs.status ';
+        const result = await pool.query(query);
         return result.rows;
     }      
 

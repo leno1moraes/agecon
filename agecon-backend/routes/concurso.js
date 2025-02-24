@@ -4,6 +4,7 @@ const ConcursoController = require('../controllers/concursoController');
 
 router.post('/', ConcursoController.createConcurso);
 router.get('/', ConcursoController.getAllConcurso);
-router.get('/allstatus/:id', ConcursoController.getAllConcursoStatus);
+router.get('/allstatus/:id', ConcursoController.getConcursoStatus);
+router.get('/concursos/status', ConcursoController.getAllConcursoStatus);
 
 module.exports = router;
